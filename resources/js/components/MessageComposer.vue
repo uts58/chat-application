@@ -12,7 +12,8 @@
             };
         },
         methods: {
-            send(){
+            send(e){
+                e.preventDefault();
                 if(this.message === ''){
                     return;
                 }
@@ -26,7 +27,7 @@
 <style lang="scss" scoped>
     .composer{
         textarea{
-            width: 90%;
+            width: 95%;
             margin: 10px;
             resize: none;
             border-radius: 3px;

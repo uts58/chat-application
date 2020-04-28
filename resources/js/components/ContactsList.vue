@@ -38,9 +38,9 @@
 </script>
 <style lang="scss" scoped>
     .contacts-list {
-        flex: 5;
+        flex: 2;
         max-height: 600px;
-        overflow: scroll;
+        overflow-y: scroll;
         border-left: 1px solid lightslategray;
 
         ul {
@@ -56,7 +56,7 @@
                 cursor: pointer;
 
                 &.selected {
-                    background: lightcoral;
+                    background: lightgray;
                 }
             }
 
@@ -74,7 +74,7 @@
 
             .contact {
                 flex: 3;
-                font-size: 10px;
+                font-size: 12px;
                 overflow: hidden;
                 display: flex;
                 flex-direction: column;

@@ -1948,6 +1948,9 @@ __webpack_require__.r(__webpack_exports__);
         _this2.messages = response.data;
         _this2.selectedContact = contact;
       });
+    },
+    saveNewMessage: function saveNewMessage(text) {
+      this.messages.push(text);
     }
   },
   components: {
@@ -2040,7 +2043,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     sendMessage: function sendMessage(text) {
-      console.log(text);
+      var _this = this;
+
+      if (this.contact) {
+        axios.post('/conversation/send', {
+          contact_id: this.contact.id,
+          text: text
+        }).then(function (response) {
+          _this.$emit('new', response.data);
+        });
+      }
     }
   },
   components: {
@@ -2073,7 +2085,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    send: function send() {
+    send: function send(e) {
+      e.preventDefault();
+
       if (this.message === '') {
         return;
       }
@@ -2115,6 +2129,23 @@ __webpack_require__.r(__webpack_exports__);
     messages: {
       type: Array,
       required: true
+    }
+  },
+  methods: {
+    scrollToBottom: function scrollToBottom() {
+      var _this = this;
+
+      setTimeout(function () {
+        _this.$refs.feed.scrollTop = _this.$refs.feed.scrollHeight - _this.$refs.feed.clientHeight;
+      }, 50);
+    }
+  },
+  watch: {
+    contact: function contact(_contact) {
+      this.scrollToBottom();
+    },
+    messages: function messages(_messages) {
+      this.scrollToBottom();
     }
   }
 });
@@ -6683,7 +6714,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".contacts-list[data-v-484f3208] {\n  flex: 5;\n  max-height: 600px;\n  overflow: scroll;\n  border-left: 1px solid lightslategray;\n}\n.contacts-list ul[data-v-484f3208] {\n  list-style-type: none;\n  padding-left: 0;\n}\n.contacts-list ul li[data-v-484f3208] {\n  display: flex;\n  padding: 2px;\n  border-bottom: 1px solid lightslategray;\n  height: 80px;\n  position: relative;\n  cursor: pointer;\n}\n.contacts-list ul li.selected[data-v-484f3208] {\n  background: lightcoral;\n}\n.contacts-list ul .avatar[data-v-484f3208] {\n  display: flex;\n  flex: 1;\n  align-items: center;\n}\n.contacts-list ul .avatar img[data-v-484f3208] {\n  width: 35px;\n  border-radius: 50%;\n  margin: 0 auto;\n}\n.contacts-list ul .contact[data-v-484f3208] {\n  flex: 3;\n  font-size: 10px;\n  overflow: hidden;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.contacts-list ul .contact p[data-v-484f3208] {\n  margin: 0;\n}\n.contacts-list ul .contact p.name[data-v-484f3208] {\n  font-weight: bold;\n}", ""]);
+exports.push([module.i, ".contacts-list[data-v-484f3208] {\n  flex: 2;\n  max-height: 600px;\n  overflow-y: scroll;\n  border-left: 1px solid lightslategray;\n}\n.contacts-list ul[data-v-484f3208] {\n  list-style-type: none;\n  padding-left: 0;\n}\n.contacts-list ul li[data-v-484f3208] {\n  display: flex;\n  padding: 2px;\n  border-bottom: 1px solid lightslategray;\n  height: 80px;\n  position: relative;\n  cursor: pointer;\n}\n.contacts-list ul li.selected[data-v-484f3208] {\n  background: lightgray;\n}\n.contacts-list ul .avatar[data-v-484f3208] {\n  display: flex;\n  flex: 1;\n  align-items: center;\n}\n.contacts-list ul .avatar img[data-v-484f3208] {\n  width: 35px;\n  border-radius: 50%;\n  margin: 0 auto;\n}\n.contacts-list ul .contact[data-v-484f3208] {\n  flex: 3;\n  font-size: 12px;\n  overflow: hidden;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.contacts-list ul .contact p[data-v-484f3208] {\n  margin: 0;\n}\n.contacts-list ul .contact p.name[data-v-484f3208] {\n  font-weight: bold;\n}", ""]);
 
 // exports
 
@@ -6721,7 +6752,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".composer textarea[data-v-5a28bf2c] {\n  width: 90%;\n  margin: 10px;\n  resize: none;\n  border-radius: 3px;\n  border: 1px solid lightslategray;\n  padding: 6px;\n}", ""]);
+exports.push([module.i, ".composer textarea[data-v-5a28bf2c] {\n  width: 95%;\n  margin: 10px;\n  resize: none;\n  border-radius: 3px;\n  border: 1px solid lightslategray;\n  padding: 6px;\n}", ""]);
 
 // exports
 
@@ -6740,7 +6771,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".feed[data-v-4b6ab3f5] {\n  background: #f0f0f0;\n  height: 100%;\n  max-height: 470px;\n  overflow: scroll;\n}\n.feed ul[data-v-4b6ab3f5] {\n  list-style-type: none;\n  padding: 5px;\n}\n.feed ul li.message[data-v-4b6ab3f5] {\n  margin: 10px 0;\n  width: 100%;\n}\n.feed ul li.message .text[data-v-4b6ab3f5] {\n  max-width: 200px;\n  border-radius: 5px;\n  padding: 12px;\n  display: inline-block;\n}\n.feed ul li.message.received[data-v-4b6ab3f5] {\n  text-align: right;\n}\n.feed ul li.message.received .text[data-v-4b6ab3f5] {\n  background: #b2b2b2;\n}\n.feed ul li.message.sent[data-v-4b6ab3f5] {\n  text-align: left;\n}\n.feed ul li.message.sent .text[data-v-4b6ab3f5] {\n  background: #81c4f9;\n}", ""]);
+exports.push([module.i, ".feed[data-v-4b6ab3f5] {\n  background: #f0f0f0;\n  height: 100%;\n  max-height: 465px;\n  overflow-y: scroll;\n}\n.feed ul[data-v-4b6ab3f5] {\n  list-style-type: none;\n  padding: 5px;\n}\n.feed ul li.message[data-v-4b6ab3f5] {\n  margin: 10px 0;\n  width: 100%;\n}\n.feed ul li.message .text[data-v-4b6ab3f5] {\n  max-width: 300px;\n  border-radius: 5px;\n  padding: 12px;\n  display: inline-block;\n}\n.feed ul li.message.received[data-v-4b6ab3f5] {\n  text-align: left;\n}\n.feed ul li.message.received .text[data-v-4b6ab3f5] {\n  background: #b2b2b2;\n}\n.feed ul li.message.sent[data-v-4b6ab3f5] {\n  text-align: right;\n}\n.feed ul li.message.sent .text[data-v-4b6ab3f5] {\n  background: #81c4f9;\n}", ""]);
 
 // exports
 
@@ -38611,7 +38642,8 @@ var render = function() {
     { staticClass: "chat-app" },
     [
       _c("Conversation", {
-        attrs: { contact: _vm.selectedContact, messages: _vm.messages }
+        attrs: { contact: _vm.selectedContact, messages: _vm.messages },
+        on: { new: _vm.saveNewMessage }
       }),
       _vm._v(" "),
       _c("ContactsList", {

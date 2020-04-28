@@ -20,6 +20,21 @@
                 type: Array,
                 required: true
             }
+        },
+        methods: {
+            scrollToBottom(){
+                setTimeout(()=>{
+                    this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
+                },50);
+            }
+        },
+        watch: {
+            contact(contact){
+                this.scrollToBottom();
+            },
+            messages(messages){
+                this.scrollToBottom();
+            }
         }
     }
 </script>
@@ -28,8 +43,8 @@
     .feed {
         background: #f0f0f0;
         height: 100%;
-        max-height: 470px;
-        overflow: scroll;
+        max-height: 465px;
+        overflow-y: scroll;
         ul {
             list-style-type: none;
             padding: 5px;
@@ -38,19 +53,19 @@
                     margin: 10px 0;
                     width: 100%;
                     .text {
-                        max-width: 200px;
+                        max-width: 300px;
                         border-radius: 5px;
                         padding: 12px;
                         display: inline-block;
                     }
                     &.received {
-                        text-align: right;
+                        text-align: left;
                         .text {
                             background: #b2b2b2;
                         }
                     }
                     &.sent {
-                        text-align: left;
+                        text-align: right;
                         .text {
                             background: #81c4f9;
                         }

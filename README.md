@@ -1,4 +1,4 @@
-## Messenger App using Laravel, Laravel-echo, Laravel Echo and Vue.JS 
+## Messenger App using Laravel, Laravel Websockets, Laravel Echo and Vue.JS 
 
 
 ## get it up and running.

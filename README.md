@@ -1,4 +1,4 @@
-## Messenger App using Laravel, Laravel Echo and Vue.JS 
+## Messenger App using Laravel, Laravel-echo, Laravel Echo and Vue.JS 
 
 
 ## get it up and running.
@@ -36,12 +36,6 @@ DB_PASSWORD=
 # run the migration files to generate the schema
 php artisan migrate
 
-# visit https://pusher.com and create a free app. then copy the keys into your .env file
-PUSHER_APP_ID=your_pusher_app_id
-PUSHER_APP_KEY=your_pusher_app_key
-PUSHER_APP_SECRET=your_pusher_app_secret
-PUSHER_APP_CLUSTER=your_pusher_cluster
-
 # change the BROADCAST_DRIVER in your .env to pusher
 BROADCAST_DRIVER=pusher
 
@@ -51,16 +45,16 @@ php artisan db:seed
 # run laravel core
 php artisan serve
 
+#run laravel-websocket
+php artisan websocket:serve
+
 # run webpack and watch for changes
 npm run watch
 ```
-
-## Setup pusher
-
-- Visit [Pusher website](https://pusher.com), sign up and create your first app (it's free).
-- Next. copy the new keys to your `.env` file.
-- Make sure the necessary settings are enabled
-![Pusher app settings](https://user-images.githubusercontent.com/17595033/64108972-fb7b8a00-cd86-11e9-97ab-d2a3f7699b71.png)
+#In case you want to use original Pusher Service
+* run ```composer remove beyondcode/laravel-websockets```
+* delete `config/websockets.php`
+* check the `config/broadcasting.php` and `resources/js/bootstrap.js` for instructions
 
 #Main Project
 https://github.com/AfikDeri/Messenger-App-VueJS-and-Laravel

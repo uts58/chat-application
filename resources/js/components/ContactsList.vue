@@ -94,8 +94,8 @@
                 align-items: center;
 
                 img {
-                    width: 35px;
-                    border-radius: 50%;
+                    width: 50px;
+                    border-radius: 10%;
                     margin: 0 auto;
                 }
             }

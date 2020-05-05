@@ -1,7 +1,8 @@
-## Messenger App using Laravel, Laravel Websockets, Laravel Echo and Vue.JS 
+## Messenger App using Laravel, Laravel Websockets, Laravel Echo, IMGBB api and Vue.JS 
 
+In case my key got restricted, you need to get your api key from `imgbb.com`
 
-## get it up and running.
+## Get it up and running.
 
 After you clone this project, do the following:
 

@@ -6,6 +6,7 @@ use App\Events\NewMessage;
 use App\Message;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ContactsController extends Controller
 {
@@ -28,7 +29,7 @@ class ContactsController extends Controller
 
     public function getMessagesFor($id)
     {
-        Message::where('from', $id)->where('to', auth()->id())->update(['read'=>true]);
+        Message::where('from', $id)->where('to', auth()->id())->update(['read' => true]);
         $messages = Message::where(function ($q) use ($id) {
             $q->where('from', auth()->id());
             $q->where('to', $id);
@@ -50,4 +51,6 @@ class ContactsController extends Controller
         broadcast(new NewMessage($message));
         return response()->json($message);
     }
+
 }
+

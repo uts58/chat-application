@@ -48,6 +48,7 @@ php artisan serve
 
 #run laravel-websocket
 php artisan websocket:serve
+YOU NEED TO GO TO http://localhost:8000/laravel-websockets AND CONNECT FOR THE FIRST TIME FOR THE WEBSOCKETS TO WORK 
 
 # run webpack and watch for changes
 npm run watch
